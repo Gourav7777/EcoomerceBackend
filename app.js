@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 // Call connection function before listen
-mongoose.connect(process.env.mongoURL)
+mongoose.connect("mongodb+srv://gourav:bundiwal@cluster0.ijznaqx.mongodb.net/Ecommerce?retryWrites=true&w=majority&appName=Cluster0")
     .then(() => {
         console.log('Connected to MongoDB');
         app.listen(port, () => {
