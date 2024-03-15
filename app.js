@@ -19,13 +19,16 @@ app.get('/', (req, res) => {
 });
 
 // Call connection function before listen
-mongoose.connect("mongodb+srv://gourav:bundiwal@cluster0.ijznaqx.mongodb.net/Ecommerce?retryWrites=true&w=majority&appName=Cluster0")
-    .then(() => {
-        console.log('Connected to MongoDB');
-        app.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error.message);
-    });
+app.listen(port, async () => {
+  try {
+    if (process.env.mongoURL) {
+      await mongoose.connect(process.env.mongoURL);
+      console.log("Connected to Database");
+    }
+  } catch (error) {
+    if (error) {
+      console.log({ message: "Unable to Connect to DB", error: error });
+    }
+  }
+  console.log(`Server running on Port ${port} - http://localhost:${port || 8080}/`);
+});
