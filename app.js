@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 // Call connection function before listen
-mongoose.connect(process.env.mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.mongoURL)
     .then(() => {
         console.log('Connected to MongoDB');
         app.listen(port, () => {
